@@ -43,8 +43,5 @@ fn get_metadata(url: &String) -> Result<CoreProviderMetadata, Box<dyn Error>> {
     //     Ok(value) => value,
     //     Err(e) => return e,
     // };
-
-    print!("{:?}", provider_metadata);
-
     Ok(provider_metadata)
 }
