@@ -24,12 +24,12 @@ fn main() {
 
     let issuer = config.get("issuer").unwrap();
     println!("Issuer is {}", issuer);
-    let s = oidc(issuer);
+    let s = get_metadata(issuer);
 
-    println!("{:?}", s)
+    println!("{:?}", s.unwrap())
 }
 
-fn oidc(url: &String) -> Result<(), Box<dyn Error>> {
+fn get_metadata(url: &String) -> Result<CoreProviderMetadata, Box<dyn Error>> {
 
     let issuer_url = IssuerUrl::new(url.to_owned())?;
     // let issuer_url = match IssuerUrl::new(url.to_owned()) {
@@ -46,5 +46,5 @@ fn oidc(url: &String) -> Result<(), Box<dyn Error>> {
 
     print!("{:?}", provider_metadata);
 
-    Ok(())
+    Ok(provider_metadata)
 }
