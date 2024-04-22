@@ -29,9 +29,21 @@ fn main() {
     println!("{:?}", s)
 }
 
-fn oidc(issuer: &String) -> Result<(), Box<dyn Error>> {
-    let provider_metadata =
-        CoreProviderMetadata::discover(&IssuerUrl::new(issuer.to_owned())?, http_client)?;
+fn oidc(url: &String) -> Result<(), Box<dyn Error>> {
+
+    let issuer_url = IssuerUrl::new(url.to_owned())?;
+    // let issuer_url = match IssuerUrl::new(url.to_owned()) {
+    //     Ok(value) => value,
+    //     Err(e) => return e,
+    // };
+    //Err(e)=> return Err(e),
+
+    let provider_metadata = CoreProviderMetadata::discover(&issuer_url, http_client)?;
+    // let provider_metadata = match CoreProviderMetadata::discover(&issuer_url, http_client) {
+    //     Ok(value) => value,
+    //     Err(e) => return e,
+    // };
+
     print!("{:?}", provider_metadata);
 
     Ok(())
